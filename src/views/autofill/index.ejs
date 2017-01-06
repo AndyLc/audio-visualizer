@@ -1,0 +1,14 @@
+<div class="container" >
+    <h2>Your Templates:</h2>
+    <% autofilltemplates.forEach(function(template) { %>
+      <a href="/autofill/<%= template.name %>">
+        <div id="template-section" style="border-bottom: 1px rgb(130, 130, 130) solid; padding: 10px">
+            <h3 style="margin-top: 15px;"><%= template.name %></h3>
+            <p style="margin-bottom: 7px;">
+                <%= template.categories %>
+            </p>
+        </div>
+      </a>
+      <% }) %>
+      <a href="/autofill/new" class="btn btn-primary" style="width: 180px; height: 45px; font-size: 19px; display:block; margin: 20px auto; ">New</a>
+</div>

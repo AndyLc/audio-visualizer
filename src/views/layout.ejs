@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!-->
+<html class="js">
+<!--<![endif]-->
+
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>audio-visualizer</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="description" content="Free HTML5 Template by FREEHTML5.CO" />
+	<meta name="keywords" content="free html5, free template, free bootstrap, html5, css3, mobile first, responsive" />
+	<meta name="author" content="FREEHTML5.CO" />
+
+	<!-- Facebook and Twitter integration -->
+	<meta property="og:title" content="" />
+	<meta property="og:image" content="" />
+	<meta property="og:url" content="" />
+	<meta property="og:site_name" content="" />
+	<meta property="og:description" content="" />
+	<meta name="twitter:title" content="" />
+	<meta name="twitter:image" content="" />
+	<meta name="twitter:url" content="" />
+	<meta name="twitter:card" content="" />
+
+	<!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
+	<link rel="shortcut icon" href="favicon.ico">
+
+	<link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,300,600,400italic,700' rel='stylesheet' type='text/css'>
+
+	<!-- Google Map -->
+	<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCefOgb1ZWqYtj7raVSmN4PL2WkTrc-KyA&sensor=false"></script>
+	<!-- bower:css -->
+	<link rel="stylesheet" href="/lib/bootstrap/dist/css/bootstrap.css" />
+	<!-- endbower -->
+	<!-- bower:js -->
+	<script src="/lib/jquery/dist/jquery.js"></script>
+	<script src="/lib/bootstrap/dist/js/bootstrap.js"></script>
+	<script src="/lib/jquery-countTo/jquery.countTo.js"></script>
+	<script src="/lib/jquery-easing/jquery.easing.js"></script>
+	<script src="/lib/jquery-easing/jquery.easing.min.js"></script>
+	<script src="/lib/jquery.stellar/jquery.stellar.js"></script>
+	<script src="/lib/respond/dest/respond.src.js"></script>
+	<!-- endbower -->
+
+	<!-- inject:css -->
+	<link rel="stylesheet" href="/css/animate.css">
+	<link rel="stylesheet" href="/css/blue.css">
+	<link rel="stylesheet" href="/css/icomoon.css">
+	<link rel="stylesheet" href="/css/index.css">
+	<link rel="stylesheet" href="/css/magnific-popup.css">
+	<link rel="stylesheet" href="/css/simple-line-icons.css">
+	<link rel="stylesheet" href="/css/style.css">
+
+	<!-- endinject -->
+	<!-- inject:js -->
+	<script src="/js/google_map.js"></script>
+	<script src="/js/jquery.style.switcher.js"></script>
+	<script src="/js/jquery.waypoints.min.js"></script>
+	<script src="/js/main.js"></script>
+	<!-- endinject -->
+
+</head>
+
+<body>
+	<% if (!locals.nav) { %>
+		<header role="banner" id="fh5co-header" class="navbar-fixed-top fh5co-animated slideInDown">
+			<div class="container">
+				<!-- <div class="row"> -->
+				<nav class="navbar navbar-default">
+					<div class="navbar-header">
+						<!-- Mobile Toggle Menu Button -->
+						<a href="/" class="js-fh5co-nav-toggle fh5co-nav-toggle" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar"><i></i></a>
+						<a class="navbar-brand" href="/">audio-visualizer</a>
+					</div>
+					<div id="navbar" class="navbar-collapse collapse">
+						<ul class="nav navbar-nav navbar-right">
+							<% if (locals.login) { %>
+								<li><a href="/autofill"><span>Autofill</span></a></li>
+								<li><a href="/formatter"><span>Formatter</span></a></li>
+								<li><a href="/users/profile"><span>Profile</span></a></li>
+								<li><a href="/users/logout"><span>Sign Out</span></a></li>
+								<% } else { %>
+									<li><a href="/auth/signin"><span>Sign In</span></a></li>
+									<% } %>
+						</ul>
+					</div>
+				</nav>
+				<!-- </div> -->
+			</div>
+		</header>
+		<% }%>
+			<div <% if (!locals.nav) { %> style="margin-top:80px; text-align: center; margin-bottom: 10px"
+				<% } else { %> style="position:fixed; z-index: 100; margin-top: 5px; width: 100%";
+					<% } %>>
+						<% if(messages.success) { %>
+							<div class="alert alert-success" style="display:inline-block; margin: 0 auto">
+								<a href="#" class="close" data-dismiss="alert" aria-label="close" style="font-size: 31px; margin-left: 6px;">&times;</a>
+								<strong>Success!</strong>
+								<%= messages.success %>.
+							</div>
+							<% } else if (messages.error) {%>
+								<div class="alert alert-danger" style="display:inline-block; margin: 0 auto">
+									<a href="#" class="close" data-dismiss="alert" aria-label="close" style="font-size: 31px; margin-left: 6px;">&times;</a>
+									<strong>Whoops!</strong>
+									<%= messages.error %>.
+								</div>
+								<% } %>
+			</div>
+			<%- body %>
+
+				<footer id="footer" role="contentinfo">
+					<div class="container">
+						<div class="">
+							<div class="col-md-12 text-center">
+								<p>audio-visualizer Free Open Source
+									<br>Created by Andy Yan and Suyog Soti
+								</p>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-md-12 text-center">
+								<ul class="social social-circle">
+									<li><a href="#"><i class="icon-twitter"></i></a></li>
+									<li><a href="#"><i class="icon-facebook"></i></a></li>
+									<li><a href="#"><i class="icon-youtube"></i></a></li>
+								</ul>
+							</div>
+						</div>
+					</div>
+				</footer>
+</body>
+
+</html>

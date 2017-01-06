@@ -1,0 +1,51 @@
+{
+  "name": "library",
+  "version": "1.0.0",
+  "description": "An application using node.js to format documents (homework, lab reports, essays, etc) neatly.",
+  "main": "app.js",
+  "scripts": {
+    "start": "gulp serve",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "local-install": "./install.sh"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/AndyLc/audio-visualizer.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/AndyLc/audio-visualizer/issues"
+  },
+  "homepage": "https://github.com/AndyLc/audio-visualizer",
+  "dependencies": {
+    "bcrypt": "^1.0.2",
+    "body-parser": "^1.15.2",
+    "cookie-parser": "^1.4.3",
+    "ejs": "^2.5.5",
+    "express": "^4.14.0",
+    "express-ejs-layouts": "^2.2.0",
+    "express-flash": "0.0.2",
+    "express-session": "^1.14.2",
+    "gulp-concat": "^2.6.0",
+    "gulp-uglifycss": "^1.0.6",
+    "mime": "^1.3.4",
+    "mocha": "^3.2.0",
+    "mongodb": "^2.2.19",
+    "mongoose": "^4.7.6",
+    "multer": "^1.2.1",
+    "passport": "^0.3.2",
+    "passport-local": "^1.0.0",
+    "waypoints": "^4.0.0"
+  },
+  "devDependencies": {
+    "chai": "^3.5.0",
+    "gulp": "^3.9.1",
+    "gulp-inject": "^4.0.0",
+    "gulp-mocha": "^3.0.1",
+    "gulp-nodemon": "^2.0.6",
+    "gulp-uglify": "^2.0.0",
+    "gulp-util": "^3.0.7",
+    "wiredep": "^4.0.0"
+  }
+}
