@@ -6,11 +6,18 @@ var jsFiles = ['*.js', 'src/**/*.js'];
 var nodemon = require('gulp-nodemon');
 var mocha = require('gulp-mocha');
 
-
+gulp.task('default',function() {
+    gulp.watch('./public/css/sass/**/*.scss',['compileSASS']);
+});
+gulp.task('compileSASS', function() {
+  var sass = require('gulp-sass');
+  gulp.src('./public/css/sass/**/*.scss')
+      .pipe(sass().on('error', sass.logError))
+      .pipe(gulp.dest('./public/css/'));
+})
 gulp.task('inject', function() {
     var wiredep = require('wiredep').stream;
     var inject = require('gulp-inject');
-
     var injectSrc = gulp.src(['./public/css/*.css', './public/js/*.js'], {
         read: false
     });
@@ -24,7 +31,8 @@ gulp.task('inject', function() {
         directory: './public/lib',
         ignorePath: '../../public'
     };
-    return gulp.src('./src/views/*.html')
+
+    return gulp.src('./src/views/layout.ejs')
         .pipe(wiredep(options))
         .pipe(inject(injectSrc, injectOptions))
         .pipe(gulp.dest('./src/views'));
@@ -52,18 +60,8 @@ gulp.task('compileCSSFiles', function () {
         .pipe(gulp.dest('./public/compiledFiles/'));
 });
 
-//test for PDF2JSON function
-
-gulp.task('testPDF2Json', function () {
-    return gulp.src("./tests/pdf2json-test.js")
-        .pipe(mocha());
-});
-
-//to run all of the tests
-gulp.task("testAll", ['testPDF2Json']);
-
 //to start the server and do the compiling
-gulp.task('serve', ['inject', 'compileJSFiles', 'compileCSSFiles'], function() {
+gulp.task('serve', ['inject', 'compileSASS', 'compileJSFiles', 'compileCSSFiles', 'default'], function() {
     var options = {
         script: 'app.js',
         delayTime: 1,

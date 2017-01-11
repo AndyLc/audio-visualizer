@@ -1,0 +1,87 @@
+div.game {
+  position: fixed;
+  z-index: 10;
+  top: 0px;
+  left: 0px;
+  width: 100%;
+  height: 100%;
+  background-color: white;
+  z-index: 2000;
+  overflow-y: scroll; }
+
+div.edit-song-gui {
+  max-width: 800px;
+  width: 100%;
+  margin: 20px;
+  box-sizing: border-box;
+  position: relative; }
+  div.edit-song-gui div.timeline-hover-info {
+    position: relative;
+    display: inline-block; }
+  div.edit-song-gui div.timeline-tools {
+    float: right;
+    position: relative; }
+    div.edit-song-gui div.timeline-tools span {
+      margin-left: 5px;
+      cursor: pointer; }
+  div.edit-song-gui div.add-note {
+    font-size: 14px;
+    margin-bottom: 20px; }
+    div.edit-song-gui div.add-note h1 {
+      color: #43A047;
+      font-size: 20px;
+      margin-bottom: 10px; }
+  div.edit-song-gui div.delete-note-list {
+    font-size: 14px; }
+    div.edit-song-gui div.delete-note-list h1 {
+      color: #e53935;
+      font-size: 20px;
+      margin-bottom: 10px; }
+    div.edit-song-gui div.delete-note-list hr {
+      margin-top: 5px;
+      margin-bottom: 5px; }
+    div.edit-song-gui div.delete-note-list div.note {
+      width: 45px;
+      text-align: center;
+      position: relative;
+      display: inline-block;
+      padding: 10px;
+      background-color: #e57373;
+      cursor: pointer;
+      color: white;
+      margin: 2px; }
+      div.edit-song-gui div.delete-note-list div.note span.delete {
+        position: absolute;
+        left: 2px;
+        top: -5px;
+        font-weight: bold; }
+    div.edit-song-gui div.delete-note-list div.m {
+      display: block; }
+      div.edit-song-gui div.delete-note-list div.m div.note {
+        background-color: #1E88E5; }
+  div.edit-song-gui div#timeline {
+    width: 100%;
+    height: 120px;
+    position: relative;
+    overflow-x: scroll; }
+    div.edit-song-gui div#timeline div#timeline-content {
+      width: 100%;
+      height: 100%;
+      border: 1px #212121 solid;
+      box-sizing: border-box;
+      position: relative; }
+      div.edit-song-gui div#timeline div#timeline-content div.current-time {
+        height: 100%;
+        width: 1px;
+        background-color: green;
+        position: absolute;
+        left: 0%; }
+      div.edit-song-gui div#timeline div#timeline-content div.tick {
+        height: 100%;
+        width: 2px;
+        background-color: #212121;
+        position: absolute;
+        cursor: pointer; }
+        div.edit-song-gui div#timeline div#timeline-content div.tick.selected {
+          background-color: #e53935;
+          width: 2px; }

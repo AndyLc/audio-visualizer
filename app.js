@@ -64,7 +64,9 @@ app.get('/', function(req, res) {
         nav: "transparent"
     });
 });
-
+app.get('/test', function(req, res) {
+  res.render('test');
+});
 app.listen(port, function(err) {
     if (err)
         console.log(err);

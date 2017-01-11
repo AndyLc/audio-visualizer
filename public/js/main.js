@@ -96,6 +96,7 @@
 
 
 	if(location.pathname != "/") {
+		var header = $('#fh5co-header');
 		header.addClass('navbar-fixed-top fh5co-animated slideInDown');
 	}
 	// Window Scroll

@@ -3,8 +3,7 @@
   "description": "An application using node.js to format documents (homework, lab reports, essays, etc) neatly.",
   "main": "app.js",
   "authors": [
-    "AndyY <ayan9005@bvsd.org>",
-    "Suyog Soti <suyog.soti@gmail.com>"
+    "AndyY <yan.andy4@gmail.com>"
   ],
   "license": "ISC",
   "homepage": "https://github.com/AndyLc/audio-visualizer",
@@ -21,7 +20,10 @@
     "jquery-countTo": "^1.2.0",
     "jquery-easing": "*",
     "jquery.stellar": "stellar#^0.6.2",
-    "respond": "^1.4.2"
+    "respond": "^1.4.2",
+    "angular": "^1.6.1",
+    "ng-media-events": "^1.0.1",
+    "angular-audio": "^1.7.3"
   },
   "overrides": {
     "bootstrap": {

@@ -3,7 +3,7 @@
 <!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
 <!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
 <!--[if gt IE 8]><!-->
-<html class="js">
+<html class="js" ng-app="audio-visualizer">
 <!--<![endif]-->
 
 <head>
@@ -44,6 +44,9 @@
 	<script src="/lib/jquery-easing/jquery.easing.min.js"></script>
 	<script src="/lib/jquery.stellar/jquery.stellar.js"></script>
 	<script src="/lib/respond/dest/respond.src.js"></script>
+	<script src="/lib/angular/angular.js"></script>
+	<script src="/lib/ng-media-events/src/ng-media-events.js"></script>
+	<script src="/lib/angular-audio/app/angular.audio.js"></script>
 	<!-- endbower -->
 
 	<!-- inject:css -->
@@ -54,13 +57,14 @@
 	<link rel="stylesheet" href="/css/magnific-popup.css">
 	<link rel="stylesheet" href="/css/simple-line-icons.css">
 	<link rel="stylesheet" href="/css/style.css">
-
+	<link rel="stylesheet" href="/css/test.css">
 	<!-- endinject -->
 	<!-- inject:js -->
-	<script src="/js/google_map.js"></script>
-	<script src="/js/jquery.style.switcher.js"></script>
+	<script src="/js/MainController.js"></script>
+	<script src="/js/NoteController.js"></script>
 	<script src="/js/jquery.waypoints.min.js"></script>
 	<script src="/js/main.js"></script>
+	<script src="/js/spotify-web-api.js"></script>
 	<!-- endinject -->
 
 </head>
@@ -111,27 +115,6 @@
 								<% } %>
 			</div>
 			<%- body %>
-
-				<footer id="footer" role="contentinfo">
-					<div class="container">
-						<div class="">
-							<div class="col-md-12 text-center">
-								<p>audio-visualizer Free Open Source
-									<br>Created by Andy Yan and Suyog Soti
-								</p>
-							</div>
-						</div>
-						<div class="row">
-							<div class="col-md-12 text-center">
-								<ul class="social social-circle">
-									<li><a href="#"><i class="icon-twitter"></i></a></li>
-									<li><a href="#"><i class="icon-facebook"></i></a></li>
-									<li><a href="#"><i class="icon-youtube"></i></a></li>
-								</ul>
-							</div>
-						</div>
-					</div>
-				</footer>
 </body>
 
 </html>
