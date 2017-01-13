@@ -1,4 +1,4 @@
-div.game {
+div.editor {
   position: fixed;
   z-index: 10;
   top: 0px;
@@ -9,12 +9,29 @@ div.game {
   z-index: 2000;
   overflow-y:scroll;
 }
+
+div.generate-song {
+  margin: 20px;
+  input#query {
+    width: 100%;
+  }
+  input[type="submit"] {
+  }
+}
+div.tracks-list {
+  a {
+    width: auto;
+  }
+}
 div.edit-song-gui {
   max-width: 800px;
   width: 100%;
   margin: 20px;
   box-sizing: border-box;
   position:relative;
+  div#result {
+    margin-bottom: 5px;
+  }
   div.timeline-hover-info {
     position:relative;
     display: inline-block;
@@ -95,7 +112,11 @@ div.edit-song-gui {
         background-color: #212121;
         position: absolute;
         cursor: pointer;
+        &.true {
+          background-color: #1E88E5;
+        }
         &.selected {
+          z-index: 1000;
           background-color: #e53935;
           width: 2px;
         }

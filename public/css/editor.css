@@ -1,4 +1,4 @@
-div.game {
+div.editor {
   position: fixed;
   z-index: 10;
   top: 0px;
@@ -9,12 +9,22 @@ div.game {
   z-index: 2000;
   overflow-y: scroll; }
 
+div.generate-song {
+  margin: 20px; }
+  div.generate-song input#query {
+    width: 100%; }
+
+div.tracks-list a {
+  width: auto; }
+
 div.edit-song-gui {
   max-width: 800px;
   width: 100%;
   margin: 20px;
   box-sizing: border-box;
   position: relative; }
+  div.edit-song-gui div#result {
+    margin-bottom: 5px; }
   div.edit-song-gui div.timeline-hover-info {
     position: relative;
     display: inline-block; }
@@ -82,6 +92,9 @@ div.edit-song-gui {
         background-color: #212121;
         position: absolute;
         cursor: pointer; }
+        div.edit-song-gui div#timeline div#timeline-content div.tick.true {
+          background-color: #1E88E5; }
         div.edit-song-gui div#timeline div#timeline-content div.tick.selected {
+          z-index: 1000;
           background-color: #e53935;
           width: 2px; }

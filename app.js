@@ -9,11 +9,25 @@ var passport = require('passport');
 var session = require('express-session');
 var flash = require('express-flash');
 var mongoose = require('mongoose');
+const MongoStore = require('connect-mongo')(session);
+require('dotenv').load();
 require('./src/models');
 
 mongoose.connect('mongodb://localhost:27017/libraryApp', function(err) {
     if (err) throw err;
 });
+
+
+app.use(session({
+    secret: 'secret',
+    resave: true,
+    maxAge: new Date(Date.now() + 3600000),
+    saveUninitialized: false,
+    store: new MongoStore(
+      {mongooseConnection:mongoose.connection}
+    )
+}));
+
 
 var port = process.env.PORT || 5000;
 
@@ -52,20 +66,15 @@ function loggedIn(req, res, next) {
 //include the routes file
 var users = require('./src/routes/users')();
 var authRoutes = require('./src/routes/authRoutes')();
-var autofillRoutes = require('./src/routes/autofill')();
-var formatterRoutes = require('./src/routes/formatter')();
+var tracksRoutes = require('./src/routes/tracks')();
 ////////
 app.use('/users', loggedIn, users);
 app.use('/auth', authRoutes);
-app.use('/autofill', loggedIn, autofillRoutes);
-app.use('/formatter', loggedIn, formatterRoutes);
+app.use('/tracks', loggedIn, tracksRoutes);
 app.get('/', function(req, res) {
     res.render('index', {
         nav: "transparent"
     });
-});
-app.get('/test', function(req, res) {
-  res.render('test');
 });
 app.listen(port, function(err) {
     if (err)

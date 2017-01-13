@@ -1,0 +1,56 @@
+<div class="editor" ng-controller="NoteController">
+    <div class="generate-song">
+        <form>
+            <input type="text" id="query" placeholder="Type the name of a track (e.g. Beyonce - Baby Boy)" ng-model="query" value="{{ query }}">
+            <input type="submit" value="Search track &amp; Calculate tempo" ng-click="getSpotifyData()">
+        </form>
+    </div>
+    <div class="tracks-list" style="margin: 20px;">
+      <a ng-repeat="track in tracks" style="margin-bottom: 0px; font-size: 13px;" href="/tracks/{{track._id}}/edit">{{ track.name }} by {{ track.artists }}</a>
+    </div>
+    <div class="edit-song-gui" keypress-events ng-hide="audio == null">
+        <div id="result">
+            <div id="text"><strong>{{ name }}</strong> by <strong>{{ artists }}</strong></div>
+            <div>
+                <button id="play" ng-click="updatePlayLabel()">{{ audioState }}</button>
+            </div>
+            <!--<audio id="audio" ng-play="updateProgressState(); updatePlayLabel();" ng-playing="updateProgressState(); updatePlayLabel();" ng-pause="updatePlayLabel();" ng-ended="updatePlayLabel();"></audio>-->
+        </div>
+        <div id="timeline">
+            <div id="timeline-content" ng-mousemove="setCursorIndication($event)" ng-click="changeTime($event)" ng-dblclick="cursorCreateNote($event)">
+                <div class="current-time" style="left:{{ audio.progress*100 + '%' }}">
+                </div>
+                <div class='tick {{ note.selected }} {{ note.m }}' data-time='{{ note.time }}' id='{{ note.id }}' style="left:{{ (100 * note.time) + '%' }}" ng-repeat="note in notes"></div>
+            </div>
+        </div>
+        <div class="timeline-hover-info">
+            {{ cursorTimeIndication }}
+        </div>
+        <div class="timeline-tools">
+            <span class="zoom-in">+</span>
+            <span class="zoom-out">-</span>
+        </div>
+        <div class="add-note">
+            <h1>Add Notes:</h1>
+            <!--<input placeholder="Enter time in percent"></input>
+        <button>+ add</button>-->
+            <p>Press play and press M whenever you hear a note.<br>Double click wherever you think a note should be on the timeline.</p>
+
+        </div>
+        <div class="delete-note-list">
+            <h1>Edit Notes:</h1>
+            <div class="notes">
+                <div class='note' data-time='{{ note.time }}' id='{{ note.id }}' ng-mouseenter='select(note)' ng-mouseleave='deselect(note)' ng-repeat="note in notes | filter: {m: false} ">
+                    <span class='delete' ng-click="deleteNote(note)">x</span> {{ Math.round(note.time * 100) + '%' }}
+                </div>
+            </div>
+            <hr>
+            <div class="m">
+                <div class='note' data-time='{{ note.time }}' id='{{ note.id }}' ng-repeat="note in notes | filter: {m: true} " ng-mouseenter='select(note)' ng-mouseleave='deselect(note)'>
+                    <span class='delete' ng-click="deleteNote(note)">x</span> {{ Math.round(note.time * 100) + '%' }}
+                </div>
+            </div>
+        </div>
+        <input type="submit" value="Submit Track Data" ng-click="submitTrackData()">
+    </div>
+</div>

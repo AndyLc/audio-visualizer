@@ -29,12 +29,14 @@ var router = function() {
             });
         });
 
-    usersRouter.get('/changepassword', function(req, res) {
-        res.render('user/changepassword', {
-            user: req.user
-        });
-    })
-
+    usersRouter.route('/mytracks')
+        .get(function(req, res) {
+          var ids = req.user.tracks;
+          ids = ids.map(function(id) { return mongoose.Types.ObjectId(id); });
+          mongoose.model('Track').find({_id: {$in: ids}}, function(err, data) {
+            res.send(data);
+          })
+        })
 
     usersRouter.route('/profile/settings')
         .get(function(req, res) {
@@ -47,7 +49,6 @@ var router = function() {
         User.findOne({email: req.user.email}, function(err, user) {
           user.email = req.body.email;
           user.save(function(err, user) {
-
           });
         });
     });

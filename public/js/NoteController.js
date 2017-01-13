@@ -6,12 +6,13 @@
     $scope.notes = [];
     $scope.progress = 0;
     $scope.audioState = "Play track";
-    $scope.title = "";
     $scope.query = "";
     $scope.cursorTimeIndication = 0;
+    $scope.tracks = [];
     var timeline = angular.element(document.getElementById("timeline"))[0];
     var timelineContent = angular.element(document.getElementById("timeline-content"))[0];
     var timelineContentOffset = timelineContent.getBoundingClientRect().left;
+
     $scope.setCursorIndication = function(e) {
       var relX = e.pageX - timelineContentOffset;
       $scope.cursorTimeIndication = Math.round((relX + timeline.scrollLeft) * 10000 / timelineContent.clientWidth)/100;
@@ -31,7 +32,7 @@
     })
     $scope.deleteNote = function(note) {
       var index = $scope.notes.indexOf(note);
-      $scope.notes.splice(note, 1);
+      $scope.notes.splice(index, 1);
     }
     var createNote = function(id, time, volume, m=false) {
       //this is the JS object
@@ -51,11 +52,11 @@
     $scope.deselect = function(note) {
       note.selected = "";
     }
+    var spotifyApi = new SpotifyWebApi();
+    spotifyApi.getToken().then(function(response) {
+        spotifyApi.setAccessToken(response.token);
+    })
     $scope.getSpotifyData = function() {
-      var spotifyApi = new SpotifyWebApi();
-      spotifyApi.getToken().then(function(response) {
-          spotifyApi.setAccessToken(response.token);
-      }).then(function() {
         spotifyApi.searchTracks(
                 $scope.query.trim(), {
                     limit: 1
@@ -63,6 +64,7 @@
             .then(function(results) {
                 var track = results.tracks.items[0];
                 var previewUrl = track.preview_url;
+                $scope.source = previewUrl;
                 $scope.audio = ngAudio.load(previewUrl);
                 var request = new XMLHttpRequest();
                 request.open('GET', previewUrl, true);
@@ -90,6 +92,7 @@
                     });
 
                     offlineContext.oncomplete = function(e) {
+                        $scope.notes = [];
                         var buffer = e.renderedBuffer;
                         var peaks = getPeaks([buffer.getChannelData(0), buffer.getChannelData(1)]);
                         var groups = getIntervals(peaks);
@@ -100,13 +103,13 @@
                         var top = groups.sort(function(intA, intB) {
                             return intB.count - intA.count;
                         }).splice(0, 5);
-                        $scope.title = track.name + ' by ' + track.artists.map(function(artist) {return artist.name}).join(", ");
+                        $scope.name = track.name;
+                        $scope.artists = track.artists.map(function(artist) {return artist.name}).join(", ");
                         result.style.display = 'block';
                     };
                 };
                 request.send();
             });
-      });
     }
     $scope.updatePlayLabel = function() {
       if($scope.audio.paused) {
@@ -208,6 +211,64 @@
             }
         });
         return groups;
+    }
+    function prepareData() {
+      var processedNotes = [];
+      $scope.notes.forEach(function(note) {
+        processedNotes.push({
+          time: note.time,
+          volume: note.volume,
+          m: note.m
+        });
+      })
+      var track = {
+        name: $scope.name,
+        artists: $scope.artists,
+        source: $scope.source,
+        duration: $scope.audio.duration,
+        notes: processedNotes
+      }
+      console.log(track);
+      return track;
+    }
+    $scope.submitTrackData = function() {
+      $http.post('/tracks/create', {track: prepareData()})
+        .then(function successCallback(response) {
+          $scope.notes = [];
+          $scope.audio = null;
+        }, function errorCallback(response) {
+          console.log(response);
+        });
+    }
+
+    var getTracks = function() {
+      $http.get('/users/mytracks')
+        .then(function successCallback(response) {
+            data = response.data;
+            $scope.tracks = response.data;
+          });
+    }
+    var getCurrentTrack = function() {
+      if(document.getElementById('data')) {
+        var id = document.getElementById('data').dataset.id;
+          $http.get('/tracks/' + id)
+            .then(function successCallback(response) {
+              $scope.name = response.data.name;
+              $scope.artists = response.data.artists;
+              $scope.notes = response.data.notes;
+              $scope.audio = ngAudio.load(response.data.source);
+              $scope.source = response.data.source;
+            })
+      }
+    }
+    getTracks();
+    getCurrentTrack();
+    $scope.updateTrackData = function() {
+      $http.post('/tracks/' + document.getElementById('data').dataset.id + '/update', {track: prepareData()})
+        .then(function successCallback(response) {
+        }, function errorCallback(response) {
+          console.log(response);
+        });
     }
   }
   app.controller("NoteController", ["$scope", "$rootScope", "$http", "ngAudio", NoteController]);
